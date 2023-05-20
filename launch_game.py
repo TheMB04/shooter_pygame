@@ -2,6 +2,7 @@ import pygame
 from enemy import Enemy
 from player import Player
 import math
+from random import randint
 
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
@@ -88,7 +89,25 @@ while running:
         old_score == score
         max_enemies += 1
 
-    
+    if len(enemies) < max_enemies:
+        hvor = randint(1, 4)
+        if hvor == 1:
+            x = 0
+            y = randint(0, 1080)
+        elif hvor == 2:
+            x = 1920
+            y = randint(0, 1080)
+        elif hvor == 3:
+            y = 0
+            x = randint(0, 1920)
+        else:
+            y = 1080
+            x = randint(0, 1920)
+        enemy = Enemy(x, y)
+        enemies.append(enemy)
+
+    for enemy in enemies:
+        enemy.draw_enemy(screen)
 
 
 
