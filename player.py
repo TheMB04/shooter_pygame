@@ -13,8 +13,6 @@ class Player:
         return self._y
 
     def draw_player(self, screen, mouse):
-        pg.draw.circle(screen, "black", (self._x, self._y), 55)
-        pg.draw.circle(screen, "darkred", (self._x, self._y), 50)
         mouse_x = mouse[0]
         mouse_y = mouse[1]
         gun = pg.image.load("shooter_pygame\gun.png")
@@ -23,14 +21,25 @@ class Player:
         dx = mouse_x - self._x
         dy = mouse_y - self._y
 
-        # finner vinkelen mellom musen og bildet "gun" i radianer og gjør det om til grader
-        self._angle = math.degrees(math.atan2(-dy, dx))
+        # finner vinkelen mellom musen og bildet "gun" i radianer
+        angle = math.atan2(-dy, dx)
+
+        # regner ut hvor mye utafor spilleren pistolen/hånden skal være i x og y retning relativ til hvor musen er
+        x_out = math.cos(angle)*75
+        y_out = math.sin(angle)*-75
+
+        print(x_out, y_out)
+        # gjør radianer om til grader
+        angle = math.degrees(angle)
 
         # roterer til å peke mot musen
-        rotated_gun = pg.transform.rotate(gun, self._angle)
-        rect = rotated_gun.get_rect(center=(self._x, self._y))
+        rotated_gun = pg.transform.rotate(gun, angle)
+        # lager en rektangel med lik størrelse som bildet
+        rect = rotated_gun.get_rect(center=((self._x+x_out), (self._y+y_out)))
 
         screen.blit(rotated_gun, rect)
+        pg.draw.circle(screen, "black", (self._x, self._y), 55)
+        pg.draw.circle(screen, "darkred", (self._x, self._y), 50)
 
     def left(self):
         pass
