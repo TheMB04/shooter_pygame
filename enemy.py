@@ -1,6 +1,6 @@
 import pygame as pg
 
-class Figur:
+class Enemy:
     def __init__(self, x, y):
         self._x = x
         self._y = y
