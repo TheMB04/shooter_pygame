@@ -18,6 +18,7 @@ class Player:
         mouse_x = mouse[0]
         mouse_y = mouse[1]
         gun = pg.image.load("shooter_pygame\gun.png")
+        screen.blit(gun, (self._x, self._y))
         pg.transform.rotate(gun, 45)
 
     def left(self):
