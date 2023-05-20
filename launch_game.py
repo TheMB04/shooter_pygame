@@ -7,6 +7,10 @@ screen = pygame.display.set_mode((1920, 1080))
 clock = pygame.time.Clock()
 running = True
 
+enemies = []
+
+bullets = []
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -14,6 +18,14 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
+            if event.key == pygame.K_a:
+                player.left()
+            if event.key == pygame.K_d:
+                player.right()
+            if event.key == pygame.K_w:
+                player.up()
+            if event.key == pygame.K_s:
+                player.down()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 player.shoot()
