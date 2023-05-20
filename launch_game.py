@@ -9,10 +9,13 @@ clock = pygame.time.Clock()
 running = True
 
 enemies = []
+max_enemies = 5
 
 bullets = []
 
 player = Player(960, 540)
+score = 0
+old_score = 0
 
 key_a = False
 key_d = False
@@ -81,7 +84,12 @@ while running:
     if key_s:
         player.down(speed_player)
     
+    if score - old_score == 10:
+        old_score == score
+        max_enemies += 1
+
     
+
 
 
     
