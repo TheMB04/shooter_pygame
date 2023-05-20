@@ -1,5 +1,5 @@
 import pygame as pg
-import math as m
+import math
 
 class Player:
     def __init__(self, x, y):
@@ -18,8 +18,19 @@ class Player:
         mouse_x = mouse[0]
         mouse_y = mouse[1]
         gun = pg.image.load("shooter_pygame\gun.png")
-        screen.blit(gun, (self._x, self._y))
-        pg.transform.rotate(gun, 45)
+        gun = pg.transform.scale(gun, (90,58))
+
+        dx = mouse_x - self._x
+        dy = mouse_y - self._y
+
+        # finner vinkelen mellom musen og bildet "gun" i radianer og gjør det om til grader
+        self._angle = math.degrees(math.atan2(-dy, dx))
+
+        # roterer til å peke mot musen
+        rotated_gun = pg.transform.rotate(gun, self._angle)
+        rect = rotated_gun.get_rect(center=(self._x, self._y))
+
+        screen.blit(rotated_gun, rect)
 
     def left(self):
         pass
