@@ -28,7 +28,6 @@ class Player:
         x_out = math.cos(angle)*75
         y_out = math.sin(angle)*-75
 
-        print(x_out, y_out)
         # gjør radianer om til grader
         angle = math.degrees(angle)
 
@@ -41,17 +40,17 @@ class Player:
         pg.draw.circle(screen, "black", (self._x, self._y), 55)
         pg.draw.circle(screen, "darkred", (self._x, self._y), 50)
 
-    def left(self):
-        pass
+    def left(self, speed):
+        self._x -= speed
 
-    def right(self):
-        pass
+    def right(self, speed):
+        self._x += speed
 
-    def up(self):
-        pass
+    def up(self, speed):
+        self._y -= speed
 
-    def down(self):
-        pass
+    def down(self, speed):
+        self._y += speed
 
     def shoot(self):
         pass
