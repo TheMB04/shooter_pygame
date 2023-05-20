@@ -11,6 +11,8 @@ enemies = []
 
 bullets = []
 
+player = Player(960, 540)
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -29,13 +31,11 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 player.shoot()
-
+        mouse = pygame.mouse.get_pos()
     
     screen.fill("dimgray")
 
-    
-
-
+    player.draw_player(screen, mouse)
 
 
 
