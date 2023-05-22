@@ -76,7 +76,7 @@ while running:
     player.draw_player(screen, mouse)
 
     if keys_down == 2:
-        speed_player == math.sqrt(speed_player**2/2)
+        speed_player = math.sqrt(speed_player**2/2)
 
     if key_a:
         player.left(speed_player)
@@ -108,12 +108,24 @@ while running:
         enemy = Enemy(x, y)
         enemies.append(enemy)
 
+    for bullet in bullets:
+        bullet.draw_bullet(screen)
+        if bullet.get_x() > 1930 or bullet.get_x() < -10:
+            bullets.remove(bullet)
+            del bullet
+        elif bullet.get_y() > 1090 or bullet.get_y() < -10:
+            bullets.remove(bullet)
+            del bullet
+
     for enemy in enemies:
         enemy.draw_enemy(screen)
         enemy.follow_player(player.get_x(), player.get_y())
+        enemy.detect_player_hit(player.get_x(), player.get_y())
 
-    for bullet in bullets:
-        bullet.draw_bullet(screen)
+        for bullet in bullets:
+            enemy.detect_bullet_hit(bullet.get_x(), bullet.get_y())
+
+    
 
 
 

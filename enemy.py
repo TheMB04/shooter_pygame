@@ -33,5 +33,8 @@ class Enemy:
         self._y += y_speed
         
 
-    def hit(self):
+    def detect_bullet_hit(self, bullet_x, bullet_y):
+        pass
+
+    def detect_player_hit(self, player_x, player_y):
         pass
