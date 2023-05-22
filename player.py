@@ -12,6 +12,9 @@ class Player:
     def get_y(self):
         return self._y
 
+    def get_angle(self):
+        return self._angle
+
     def draw_player(self, screen, mouse):
         mouse_x = mouse[0]
         mouse_y = mouse[1]
@@ -22,17 +25,17 @@ class Player:
         dy = mouse_y - self._y
 
         # finner vinkelen mellom musen og bildet "gun" i radianer
-        angle = math.atan2(-dy, dx)
+        self._angle = math.atan2(-dy, dx)
 
         # regner ut hvor mye utafor spilleren pistolen/hånden skal være i x og y retning relativ til hvor musen er
-        x_out = math.cos(angle)*75
-        y_out = math.sin(angle)*-75
+        x_out = math.cos(self._angle)*75
+        y_out = math.sin(self._angle)*-75
 
         # gjør radianer om til grader
-        angle = math.degrees(angle)
+        self._angle = math.degrees(self._angle)
 
         # roterer til å peke mot musen
-        rotated_gun = pg.transform.rotate(gun, angle)
+        rotated_gun = pg.transform.rotate(gun, self._angle)
         # lager en rektangel med lik størrelse som bildet
         rect = rotated_gun.get_rect(center=((self._x+x_out), (self._y+y_out)))
 
@@ -52,12 +55,22 @@ class Player:
     def down(self, speed):
         self._y += speed
 
-    def shoot(self):
-        pass
-
 
 class Bullet:
     def __init__(self, x, y, angle):
-        self._x = x
-        self._y = y
-        self._angle = angle
+        self._angle = math.radians(angle)
+        self._x_speed = math.cos(self._angle)*8
+        self._y_speed = math.sin(self._angle)*-8
+        self._x = x + self._x_speed*15
+        self._y = y + self._y_speed*15
+
+    def draw_bullet(self, screen):
+        pg.draw.circle(screen, "black", (self._x, self._y), 6)
+        self._x += self._x_speed
+        self._y += self._y_speed
+
+    def get_x(self):
+        return self._x
+
+    def get_y(self):
+        return self._y

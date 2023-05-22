@@ -1,6 +1,7 @@
 import pygame
 from enemy import Enemy
 from player import Player
+from player import Bullet
 import math
 from random import randint
 
@@ -65,7 +66,8 @@ while running:
                 keys_down -= 1
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                player.shoot()
+                bullet = Bullet(player.get_x(), player.get_y(), player.get_angle())
+                bullets.append(bullet)
         
     
     screen.fill("dimgray")
@@ -108,6 +110,10 @@ while running:
 
     for enemy in enemies:
         enemy.draw_enemy(screen)
+        enemy.follow_player(player.get_x(), player.get_y())
+
+    for bullet in bullets:
+        bullet.draw_bullet(screen)
 
 
 
