@@ -34,7 +34,27 @@ class Enemy:
         
 
     def detect_bullet_hit(self, bullet_x, bullet_y):
-        pass
+        dx = bullet_x - self._x
+        dy = bullet_y - self._y
+
+        distance = math.sqrt(dx**2+dy**2)
+        
+
+        if distance <= 61:
+            self._g += 50
+            return True
 
     def detect_player_hit(self, player_x, player_y):
-        pass
+        dx = player_x - self._x
+        dy = player_y - self._y
+
+        distance = math.sqrt(dx**2+dy**2)
+
+        if distance <= 110:
+            pass
+
+    def hit(self):
+        self._life -= 1
+
+    def get_life(self):
+        return self._life

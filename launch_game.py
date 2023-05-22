@@ -88,7 +88,7 @@ while running:
         player.down(speed_player)
     
     if score - old_score == 10:
-        old_score == score
+        old_score = score
         max_enemies += 1
 
     if len(enemies) < max_enemies:
@@ -123,7 +123,18 @@ while running:
         enemy.detect_player_hit(player.get_x(), player.get_y())
 
         for bullet in bullets:
-            enemy.detect_bullet_hit(bullet.get_x(), bullet.get_y())
+            if enemy.detect_bullet_hit(bullet.get_x(), bullet.get_y()):
+                enemy.hit()
+                bullets.remove(bullet)
+                del bullet
+
+        if enemy.get_life() <= 0:
+            enemies.remove(enemy)
+            del enemy
+            score += 1
+            print(score)
+
+        
 
     
 
