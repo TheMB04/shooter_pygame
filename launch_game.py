@@ -30,8 +30,10 @@ while running:
     speed_player = 3
 
     for event in pygame.event.get():
+        
         if event.type == pygame.QUIT:
             running = False
+
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
@@ -51,6 +53,7 @@ while running:
                 player.down(speed_player)
                 key_s = True
                 keys_down += 1
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 key_a = False
@@ -64,6 +67,7 @@ while running:
             if event.key == pygame.K_s:
                 key_s = False
                 keys_down -= 1
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 bullet = Bullet(player.get_x(), player.get_y(), player.get_angle())
@@ -92,7 +96,9 @@ while running:
         max_enemies += 1
 
     if len(enemies) < max_enemies:
+
         hvor = randint(1, 4)
+
         if hvor == 1:
             x = 0
             y = randint(0, 1080)
@@ -105,11 +111,14 @@ while running:
         else:
             y = 1080
             x = randint(0, 1920)
+
         enemy = Enemy(x, y)
         enemies.append(enemy)
 
     for bullet in bullets:
+
         bullet.draw_bullet(screen)
+
         if bullet.get_x() > 1930 or bullet.get_x() < -10:
             bullets.remove(bullet)
             del bullet
