@@ -26,6 +26,8 @@ key_w = False
 key_s = False
 keys_down = 0
 
+font = pygame.font.SysFont("Impact", 104)
+
 while running:
 
     speed_player = 3
@@ -54,6 +56,9 @@ while running:
                 player.down(speed_player)
                 key_s = True
                 keys_down += 1
+            if event.key == pygame.K_SPACE:
+                bullet = Bullet(player.get_x(), player.get_y(), player.get_angle())
+                bullets.append(bullet)
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
@@ -142,12 +147,17 @@ while running:
             enemies.remove(enemy)
             del enemy
             score += 1
-            print(score)
-
         
 
-    
-
+        if score >= 10:
+            points = font.render(f"{score}", True, (255, 255, 255))
+            screen.blit(points, (display_info.current_w/2 - 52, 20))
+        elif score >= 100:
+            points = font.render(f"{score}", True, (255, 255, 255))
+            screen.blit(points, (display_info.current_w/2 - 78, 20))
+        else:
+            points = font.render(f"{score}", True, (255, 255, 255))
+            screen.blit(points, (display_info.current_w/2 - 26, 20))
 
 
     
