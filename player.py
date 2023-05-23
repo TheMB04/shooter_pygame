@@ -18,7 +18,7 @@ class Player:
     def draw_player(self, screen, mouse):
         mouse_x = mouse[0]
         mouse_y = mouse[1]
-        gun = pg.image.load("shooter_pygame\gun.png")
+        gun = pg.image.load("..\shooter_pygame\gun.png")
         gun = pg.transform.scale(gun, (90,58))
 
         dx = mouse_x - self._x

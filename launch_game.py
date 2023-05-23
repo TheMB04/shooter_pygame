@@ -6,7 +6,8 @@ import math
 from random import randint
 
 pygame.init()
-screen = pygame.display.set_mode((1920, 1080))
+display_info = pygame.display.Info()
+screen = pygame.display.set_mode((display_info.current_w, display_info.current_h))
 clock = pygame.time.Clock()
 running = True
 
@@ -15,7 +16,7 @@ max_enemies = 5
 
 bullets = []
 
-player = Player(960, 540)
+player = Player(display_info.current_w/2, display_info.current_h/2)
 score = 0
 old_score = 0
 
@@ -101,16 +102,16 @@ while running:
 
         if hvor == 1:
             x = 0
-            y = randint(0, 1080)
+            y = randint(0, display_info.current_h)
         elif hvor == 2:
             x = 1920
-            y = randint(0, 1080)
+            y = randint(0, display_info.current_h)
         elif hvor == 3:
             y = 0
-            x = randint(0, 1920)
+            x = randint(0, display_info.current_w)
         else:
             y = 1080
-            x = randint(0, 1920)
+            x = randint(0, display_info.current_w)
 
         enemy = Enemy(x, y)
         enemies.append(enemy)
@@ -119,10 +120,10 @@ while running:
 
         bullet.draw_bullet(screen)
 
-        if bullet.get_x() > 1930 or bullet.get_x() < -10:
+        if bullet.get_x() > display_info.current_w + 10 or bullet.get_x() < -10:
             bullets.remove(bullet)
             del bullet
-        elif bullet.get_y() > 1090 or bullet.get_y() < -10:
+        elif bullet.get_y() > display_info.current_h + 10 or bullet.get_y() < -10:
             bullets.remove(bullet)
             del bullet
 
