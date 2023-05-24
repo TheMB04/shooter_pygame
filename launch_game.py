@@ -52,6 +52,8 @@ while running:
                     score = 0
                     old_score = 0
 
+                    max_enemies = 5
+
                     game_state = "running"
 
 
