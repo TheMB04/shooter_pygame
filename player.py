@@ -2,9 +2,10 @@ import pygame as pg
 import math
 
 class Player:
-    def __init__(self, x, y):
+    def __init__(self, x, y, radius):
         self._x = x
         self._y = y
+        self._radius = radius
 
     def get_x(self):
         return self._x
@@ -18,7 +19,7 @@ class Player:
     def draw_player(self, screen, mouse):
         mouse_x = mouse[0]
         mouse_y = mouse[1]
-        gun = pg.image.load("..\shooter_pygame\gun.png")
+        gun = pg.image.load("gun.png")
         gun = pg.transform.scale(gun, (90,58))
 
         dx = mouse_x - self._x
@@ -40,8 +41,8 @@ class Player:
         rect = rotated_gun.get_rect(center=((self._x+x_out), (self._y+y_out)))
 
         screen.blit(rotated_gun, rect)
-        pg.draw.circle(screen, "black", (self._x, self._y), 55)
-        pg.draw.circle(screen, "darkred", (self._x, self._y), 50)
+        pg.draw.circle(screen, "black", (self._x, self._y), self._radius)
+        pg.draw.circle(screen, "darkred", (self._x, self._y), (self._radius - 5))
 
     def left(self, speed):
         self._x -= speed
@@ -57,15 +58,16 @@ class Player:
 
 
 class Bullet:
-    def __init__(self, x, y, angle):
+    def __init__(self, x, y, angle, radius):
         self._angle = math.radians(angle)
         self._x_speed = math.cos(self._angle)*8
         self._y_speed = math.sin(self._angle)*-8
+        self._radius = radius
         self._x = x + self._x_speed*15
         self._y = y + self._y_speed*15
 
     def draw_bullet(self, screen):
-        pg.draw.circle(screen, "black", (self._x, self._y), 6)
+        pg.draw.circle(screen, "black", (self._x, self._y), self._radius)
         self._x += self._x_speed
         self._y += self._y_speed
 
